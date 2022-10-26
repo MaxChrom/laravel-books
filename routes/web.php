@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\TestController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api;
+use App\Http\Controllers\Api\BookController as ApiBookController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomePageController;
 
@@ -27,3 +29,5 @@ Route::get('/api/test/book/{book_id}', [TestController::class, 'book']);
 Route::get('/api/test/collection', [TestController::class, 'collectionResponse']);
 Route::get('/home', [HomeController::class, 'home'])->middleware('auth')->name('home');
 // Route::get('/home', [HomeController::class, 'home'])->middleware('auth')->name('home');
+Route::get('/book/{book_id}', [BookController::class, 'show'])->whereNumber('book_id')->name('book.show');
+Route::post('/book/{book_id}/review', [BookController::class, 'saveReview'])->whereNumber('book_id')->name('book.save-review');
